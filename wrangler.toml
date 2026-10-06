@@ -2,7 +2,6 @@ name = "smartpos-api"
 main = "src/server/index.ts"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = "dist"
 
 [triggers]
 crons = ["0 * * * *"]
