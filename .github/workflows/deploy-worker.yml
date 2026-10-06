@@ -52,25 +52,25 @@ jobs:
       - name: Test
         run: npm test
 
-      - name: Apply production D1 migrations
+      - name: Apply D1 migrations
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: d1 migrations apply smartpos-db-production --remote --env production
+          command: d1 migrations apply smartpos-db --remote
 
-      - name: Set production JWT secret
+      - name: Set JWT secret
         shell: bash
         run: |
           set -euo pipefail
-          printf '%s' "$JWT_SECRET" | npx wrangler secret put JWT_SECRET --env production
+          printf '%s' "$JWT_SECRET" | npx wrangler secret put JWT_SECRET
 
       - name: Build frontend
         run: npm run build
 
-      - name: Deploy production Worker
+      - name: Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy --env production
+          command: deploy
