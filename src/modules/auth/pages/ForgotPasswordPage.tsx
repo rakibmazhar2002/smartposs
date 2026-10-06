@@ -1,0 +1,16 @@
+import { ArrowLeft, ArrowRight, Mail, ShieldCheck, Sparkles } from 'lucide-react';
+import { useState, type FormEvent } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@/app/components/ui/button';
+import { Input } from '@/app/components/ui/input';
+import { Label } from '@/app/components/ui/label';
+import { api, ApiError } from '@/core/services/api-client';
+
+export function ForgotPasswordPage() {
+  const [form, setForm] = useState({ tenantSlug: '', email: '' });
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  async function submit(event: FormEvent) { event.preventDefault(); setError(''); setLoading(true); try { await api.auth.forgotPassword(form); setSent(true); } catch (caught) { setError(caught instanceof ApiError ? caught.message : 'Please try again.'); } finally { setLoading(false); } }
+  return <div className="flex min-h-screen items-center justify-center bg-background px-5 py-10"><div className="w-full max-w-md"><Link to="/login" className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Back to sign in</Link><div className="mt-12 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary"><Sparkles className="h-6 w-6" /></div><p className="eyebrow mt-8">Account recovery</p><h1 className="mt-3 text-3xl font-semibold tracking-tight">Reset your password</h1><p className="mt-3 text-sm leading-6 text-muted-foreground">Enter your workspace and email. If an account matches, recovery instructions will be sent securely.</p>{sent ? <div className="mt-8 rounded-2xl border border-success/20 bg-success/5 p-5"><ShieldCheck className="h-6 w-6 text-success" /><h2 className="mt-3 font-semibold">Check your inbox</h2><p className="mt-2 text-sm leading-6 text-muted-foreground">If the account exists, a reset link will arrive shortly. The response is intentionally generic to protect workspace privacy.</p><Link to="/login" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">Return to sign in <ArrowRight className="h-4 w-4" /></Link></div> : <form onSubmit={submit} className="mt-8 space-y-5"><div className="space-y-2"><Label htmlFor="tenantSlug">Workspace slug</Label><Input id="tenantSlug" value={form.tenantSlug} onChange={(event) => setForm({ ...form, tenantSlug: event.target.value })} placeholder="northstar" required /></div><div className="space-y-2"><Label htmlFor="email">Work email</Label><div className="relative"><Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><Input id="email" type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} placeholder="you@company.com" className="pl-10" required /></div></div>{error ? <div role="alert" className="rounded-lg border border-destructive/20 bg-destructive/5 px-3 py-2.5 text-sm text-destructive">{error}</div> : null}<Button type="submit" className="h-12 w-full" disabled={loading}>{loading ? 'Sending secure link…' : <>Send recovery link <ArrowRight className="h-4 w-4" /></>}</Button></form>}</div></div>;
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="SmartPOS">
+  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#2563eb"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+  <rect width="192" height="192" rx="44" fill="#0b1220"/>
+  <path d="M47 49h98a9 9 0 0 1 9 9v58a9 9 0 0 1-9 9H47a9 9 0 0 1-9-9V58a9 9 0 0 1 9-9Z" fill="url(#g)"/>
+  <path d="M57 68h78M57 89h38M57 110h57" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".95"/>
+  <circle cx="128" cy="89" r="8" fill="#fff"/>
+</svg>

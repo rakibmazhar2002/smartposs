@@ -1,0 +1,53 @@
+name = "smartpos-api"
+main = "src/server/index.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "dist"
+
+[triggers]
+crons = ["0 * * * *"]
+
+[vars]
+ENVIRONMENT = "development"
+APP_URL = "http://localhost:5173"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "smartpos-db"
+database_id = "YOUR_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "smartpos-media"
+preview_bucket_name = "smartpos-media-preview"
+
+[env.staging]
+name = "smartpos-api-staging"
+vars = { ENVIRONMENT = "staging", APP_URL = "https://staging.smartpos.example" }
+
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "smartpos-db-staging"
+database_id = "YOUR_STAGING_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[[env.staging.r2_buckets]]
+binding = "STORAGE"
+bucket_name = "smartpos-media-staging"
+preview_bucket_name = "smartpos-media-staging-preview"
+
+[env.production]
+name = "smartpos-api-production"
+vars = { ENVIRONMENT = "production", APP_URL = "https://app.smartpos.example" }
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "smartpos-db-production"
+database_id = "YOUR_PRODUCTION_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[[env.production.r2_buckets]]
+binding = "STORAGE"
+bucket_name = "smartpos-media-production"
+preview_bucket_name = "smartpos-media-production-preview"
