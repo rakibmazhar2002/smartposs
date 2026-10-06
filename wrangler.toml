@@ -11,31 +11,11 @@ not_found_handling = "single-page-application"
 crons = ["0 * * * *"]
 
 [vars]
-ENVIRONMENT = "development"
-APP_URL = "http://localhost:5173"
+ENVIRONMENT = "production"
+APP_URL = "https://smartposs.mirakib2246.workers.dev"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "smartpos-db"
-database_id = "ffd2658b-ac3e-4301-a36a-3f1a71e9a8ab"
-migrations_dir = "migrations"
-
-[env.staging]
-name = "smartpos-api-staging"
-vars = { ENVIRONMENT = "staging", APP_URL = "https://staging.smartpos.example" }
-
-[[env.staging.d1_databases]]
-binding = "DB"
-database_name = "smartpos-db-staging"
-database_id = "ffd2658b-ac3e-4301-a36a-3f1a71e9a8ab"
-migrations_dir = "migrations"
-
-[env.production]
-name = "smartpos-api-production"
-vars = { ENVIRONMENT = "production", APP_URL = "https://app.smartpos.example" }
-
-[[env.production.d1_databases]]
-binding = "DB"
-database_name = "smartpos-db-production"
 database_id = "ffd2658b-ac3e-4301-a36a-3f1a71e9a8ab"
 migrations_dir = "migrations"
