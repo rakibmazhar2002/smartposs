@@ -17,19 +17,13 @@ database_name = "smartpos-db"
 database_id = "ffd2658b-ac3e-4301-a36a-3f1a71e9a8ab"
 migrations_dir = "migrations"
 
-# R2 Bucket (যদি R2 তৈরি না করে থাকেন, তবে ডেপ্লয়মেন্টে এরর দিলে নিচের ৩ লাইন কমেন্ট বা ডিলিট করতে পারেন)
-[[r2_buckets]]
-binding = "STORAGE"
-bucket_name = "smartpos-media"
-preview_bucket_name = "smartpos-media-preview"
-
 [env.staging]
 name = "smartpos-api-staging"
 vars = { ENVIRONMENT = "staging", APP_URL = "https://staging.smartpos.example" }
 
 [[env.staging.d1_databases]]
 binding = "DB"
-database_name = "smartpos-db"
+database_name = "smartpos-db-staging"
 database_id = "ffd2658b-ac3e-4301-a36a-3f1a71e9a8ab"
 migrations_dir = "migrations"
 
@@ -39,6 +33,6 @@ vars = { ENVIRONMENT = "production", APP_URL = "https://app.smartpos.example" }
 
 [[env.production.d1_databases]]
 binding = "DB"
-database_name = "smartpos-db"
+database_name = "smartpos-db-production"
 database_id = "ffd2658b-ac3e-4301-a36a-3f1a71e9a8ab"
 migrations_dir = "migrations"
